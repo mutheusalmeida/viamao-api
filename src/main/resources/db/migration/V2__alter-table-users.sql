@@ -1,0 +1,1 @@
+ALTER TABLE users MODIFY username VARCHAR(100)

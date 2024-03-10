@@ -1,7 +1,5 @@
 package viamao.api.infra.exception;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -16,9 +14,6 @@ import jakarta.persistence.EntityNotFoundException;
 
 @RestControllerAdvice
 public class ErrorHandler {
-	
-	@Autowired
-	ResourceBundleMessageSource messageSource;
 	
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<ErrorResponse> handleError(RuntimeException exception) {
