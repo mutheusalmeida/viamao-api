@@ -1,14 +1,14 @@
 package viamao.api.domain.trip;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record UpdateTripRequest(
 		
 		String title,
 		String description,
 		String destination,
-		LocalDateTime startDate,
-		LocalDateTime endDate
+		LocalDate startDate,
+		LocalDate endDate
 		
 		) {
 	
