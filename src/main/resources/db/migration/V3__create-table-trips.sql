@@ -1,0 +1,10 @@
+CREATE TABLE trips(
+  id BIGINT NOT NULL AUTO_INCREMENT, 
+  title VARCHAR(100) NOT NULL,
+  description VARCHAR(260) NOT NULL,
+  destination VARCHAR(100) NOT NULL,
+  start_date DATETIME NOT NULL,
+  end_date DATETIME NOT NULL,
+
+  PRIMARY KEY(id)
+);
