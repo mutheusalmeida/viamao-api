@@ -1,6 +1,6 @@
 package viamao.api.domain.trip;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,10 +17,10 @@ public record TripRequest(
 		String destination,
 		
 		@NotNull(message = "Start date is required")
-		LocalDate startDate,
+		LocalDateTime startDate,
 		
 		@NotNull(message = "End date is required")
-		LocalDate endDate
+		LocalDateTime endDate
 		
 		) {
 

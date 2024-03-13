@@ -1,6 +1,6 @@
 package viamao.api.domain.trip;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record TripResponse(
 		
@@ -8,18 +8,18 @@ public record TripResponse(
 		String title,
 		String description,
 		String destination,
-		LocalDate startDate,
-		LocalDate endDate
+		LocalDateTime startDate,
+		LocalDateTime endDate
 		
 		) {
 
 	public TripResponse(Trip trip, String id) {
 		this(
 				id, 
-				trip.getTitle(), 
+				trip.getTitle(),
 				trip.getDescription(), 
-				trip.getDestination(), 
-				trip.getStartDate(), 
+				trip.getDestination(),
+				trip.getStartDate(),
 				trip.getEndDate());
 	}
 	

@@ -1,6 +1,6 @@
 package viamao.api.domain.trip;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +35,10 @@ public class Trip {
 	private String destination;
 	
 	@Column(name =  "start_date")
-	private LocalDate startDate;
+	private LocalDateTime startDate;
 	
 	@Column(name =  "end_date")
-	private LocalDate endDate;
+	private LocalDateTime endDate;
 
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
 	private List<Place> places = new ArrayList<Place>();
