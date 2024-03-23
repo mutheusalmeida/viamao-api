@@ -9,5 +9,8 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 	
 	@Query("SELECT t from Trip t ORDER BY t.startDate ASC")
 	Page<Trip> findAll(Pageable pagination);
+
+	@Query("SELECT t from Trip t WHERE t.owner.id = :userId ORDER BY t.startDate ASC")
+	Page<Trip> findTripsByOwnerId(Long userId, Pageable pagination);
 	
 }

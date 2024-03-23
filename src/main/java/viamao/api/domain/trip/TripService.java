@@ -11,6 +11,7 @@ import org.sqids.Sqids;
 import viamao.api.domain.place.Place;
 import viamao.api.domain.place.PlaceRepository;
 import viamao.api.domain.place.PlaceRequest;
+import viamao.api.domain.user.User;
 
 @Service
 public class TripService {
@@ -24,12 +25,12 @@ public class TripService {
 	@Autowired
 	Sqids sqids;
 
-	public Trip save(TripRequest req) {
-		return tripRepository.save(new Trip(req));
+	public Trip save(TripRequest req, User user) {
+		return tripRepository.save(new Trip(req, user));
 	}
 
-	public Page<TripResponse> getAllTrips(Pageable pagination) {
-		return tripRepository.findAll(pagination).map(t -> {
+	public Page<TripResponse> getAllTrips(Pageable pagination, Long userId) {
+		return tripRepository.findTripsByOwnerId(userId, pagination).map(t -> {
 			String id = sqids.encode(Arrays.asList(t.getId()));
 			
 			return new TripResponse(t, id);

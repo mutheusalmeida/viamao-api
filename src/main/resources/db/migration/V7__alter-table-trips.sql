@@ -1,0 +1,1 @@
+ALTER TABLE trips ADD owner_id BIGINT NOT NULL;

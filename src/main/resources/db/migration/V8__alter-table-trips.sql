@@ -1,0 +1,1 @@
+ALTER TABLE trips ADD CONSTRAINT fk_owner_id FOREIGN KEY (owner_id) REFERENCES users(id);

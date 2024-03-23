@@ -7,15 +7,18 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import viamao.api.domain.place.Place;
+import viamao.api.domain.user.User;
 
 @Table(name = "trips")
 @Entity(name = "Trip")
@@ -34,6 +37,9 @@ public class Trip {
 	
 	private String destination;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User owner;
+	
 	@Column(name =  "start_date")
 	private LocalDateTime startDate;
 	
@@ -43,7 +49,8 @@ public class Trip {
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
 	private List<Place> places = new ArrayList<Place>();
 	
-	public Trip(TripRequest req) {
+	public Trip(TripRequest req, User user) {
+		this.owner = user;
 		this.title = req.title();
 		this.description = req.description();
 		this.destination = req.destination();

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import viamao.api.domain.trip.TripRequest;
 import viamao.api.domain.trip.TripResponse;
 import viamao.api.domain.trip.TripService;
 import viamao.api.domain.trip.UpdateTripRequest;
+import viamao.api.domain.user.User;
 
 @RestController
 @RequestMapping("trips")
@@ -41,8 +43,8 @@ public class TripController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<TripResponse> addTrip(@RequestBody @Valid TripRequest req, UriComponentsBuilder uriBuilder) {
-		var trip = tripService.save(req);
+	public ResponseEntity<TripResponse> addTrip(@RequestBody @Valid TripRequest req, @AuthenticationPrincipal User user, UriComponentsBuilder uriBuilder) {
+		var trip = tripService.save(req, user);
 		
 		String id = sqids.encode(Arrays.asList(trip.getId()));
 		
@@ -53,8 +55,8 @@ public class TripController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<Page<TripResponse>> getTrips(@PageableDefault(size = 10) Pageable pagination) {
-		var trips = tripService.getAllTrips(pagination);
+	public ResponseEntity<Page<TripResponse>> getTrips(@PageableDefault(size = 10) Pageable pagination, @AuthenticationPrincipal User user) {
+		var trips = tripService.getAllTrips(pagination, user.getId());
 		
 		return ResponseEntity.ok(trips);
 	}
